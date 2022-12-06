@@ -64,7 +64,7 @@ public class LoginScreenView extends Screen{
 		left = new VBox();
 
 		right = new VBox();
-		loginFormLabel = new Label("Login");
+		loginFormLabel = new Label("PaKCman!");
 		usernameLabel = new Label("Username");
 		passwordLabel = new Label("Password");
 		usernameTextField = new TextField();
@@ -83,7 +83,7 @@ public class LoginScreenView extends Screen{
 		layoutContainer.setCenter(layout);
 		layoutContainer.setBackground(
 			new Background(
-			new BackgroundFill(palette.colorPalette.get("Primary-Light"), 
+			new BackgroundFill(Color.BLACK, 
 				CornerRadii.EMPTY, 
 				new Insets(0))));
 		
@@ -97,7 +97,7 @@ public class LoginScreenView extends Screen{
 		left.setBackground(
 			new Background(
 			new BackgroundImage(
-				new Image("file:./assets/login-view/vacation-destination.jpg"),
+				new Image("file:./assets/login-view/gameplay-screen.png"),
 				BackgroundRepeat.NO_REPEAT,
 				BackgroundRepeat.NO_REPEAT,
 				BackgroundPosition.CENTER,
@@ -106,62 +106,77 @@ public class LoginScreenView extends Screen{
 		left.setEffect(
 			new DropShadow(
 				BlurType.values()[2], 
-				Color.BLACK, 5, 3.0f, 2.0f, 2.0f));
+				palette.colorPalette.get("Dark-Blue"), 7, 3.0f, 2.0f, 2.0f));
 		
 		right.setPrefSize(dimension, dimension);
 		right.setBackground(
 			new Background(
-			new BackgroundFill(palette.colorPalette.get("Secondary"), 
+			new BackgroundFill(Color.BLACK, 
 				CornerRadii.EMPTY, 
 				new Insets(0))));
 		right.setEffect(
 				new DropShadow(
 					BlurType.values()[2], 
-					Color.BLACK, 5, 3.0f, 2.0f, 2.0f));
+					palette.colorPalette.get("Dark-Blue"), 7, 3.0f, 2.0f, 2.0f));
 		
  		loginFormLabel.setFont(FontPalette.titleFont);
- 		loginFormLabel.setPadding(new Insets(-10, 0, 100, 0));
+ 		loginFormLabel.setPadding(new Insets(20, 0, 70, 0));
+ 		loginFormLabel.setTextFill(palette.colorPalette.get("Yellow"));
 		right.getChildren().add(loginFormLabel);
 		
 		usernameLabel.setFont(FontPalette.subtitleFont);
+		usernameLabel.setTextFill(palette.colorPalette.get("Yellow"));
 		passwordLabel.setFont(FontPalette.subtitleFont);
+		passwordLabel.setTextFill(palette.colorPalette.get("Yellow"));
 		usernameTextField.setPrefSize(250, 30);
 		usernameTextField.setBorder(
 			new Border(
 			new BorderStroke(
-				Color.BLACK,
+				palette.colorPalette.get("Yellow"),
 				BorderStrokeStyle.SOLID,
-				CornerRadii.EMPTY,
-				BorderWidths.DEFAULT)));
+				new CornerRadii(3),
+				new BorderWidths(2))));
+		usernameTextField.setBackground(null);
+		usernameTextField.setStyle("-fx-text-fill: rgb(255, 255, 0)");
 		passwordPasswordField.setPrefSize(250, 30);
 		passwordPasswordField.setBorder(
 				new Border(
 				new BorderStroke(
-					Color.BLACK,
+					palette.colorPalette.get("Yellow"),
 					BorderStrokeStyle.SOLID,
-					CornerRadii.EMPTY,
-					BorderWidths.DEFAULT)));
+					new CornerRadii(3),
+					new BorderWidths(2))));
+		passwordPasswordField.setBackground(null);
+		passwordPasswordField.setStyle("-fx-text-fill: rgb(255, 255, 0)");
 		
 		formContainer.add(usernameLabel, 0, 0);
 		formContainer.add(usernameTextField, 1, 0);
 		formContainer.add(passwordLabel, 0, 1);
 		formContainer.add(passwordPasswordField, 1, 1);
-		formContainer.setPadding(new Insets(0, 0, 0, 33));
+		formContainer.setPadding(new Insets(0, 0, 50, 33));
 		formContainer.setHgap(10);
 		formContainer.setVgap(10);
 		right.getChildren().add(formContainer);
 		
 		loginButton.setPrefSize(250, 30);
 		loginButton.setBackground(
-			new Background(
-			new BackgroundFill(
-				palette.colorPalette.get("Primary-Dark"),
-				CornerRadii.EMPTY,
-				Insets.EMPTY)));
-		loginButton.setTextFill(palette.colorPalette.get("Secondary"));
+				new Background(
+				new BackgroundFill(
+					Color.BLACK,
+					new CornerRadii(3),
+					Insets.EMPTY)));
+		loginButton.setTextFill(palette.colorPalette.get("Yellow"));
 		loginButton.setFont(FontPalette.subtitleFont);
-		VBox.setMargin(loginButton, new Insets(30, 0, 40, 73));
-		right.getChildren().add(loginButton);
+		loginButton.setBorder(
+				new Border(
+				new BorderStroke(
+					palette.colorPalette.get("Yellow"),
+					BorderStrokeStyle.SOLID,
+					new CornerRadii(3),
+					new BorderWidths(2))));
+		formContainer.add(loginButton, 1, 2);
+		
+		registerLabel.setTextFill(palette.colorPalette.get("Red"));
 		
 		registerContainer.getChildren().add(registerLabel);
 		registerContainer.getChildren().add(registerButton);
@@ -170,7 +185,7 @@ public class LoginScreenView extends Screen{
 		
 		registerButton.setBackground(null);
 		registerButton.setPadding(new Insets(0));
-		registerButton.setTextFill(palette.colorPalette.get("Primary-Dark"));
+		registerButton.setTextFill(palette.colorPalette.get("Yellow"));
 		registerButton.setStyle("-fx-font-weight: bold");
 		right.setAlignment(Pos.CENTER);
 		
@@ -186,26 +201,44 @@ public class LoginScreenView extends Screen{
 					palette.colorPalette.get("Primary-Dark"), 
 					CornerRadii.EMPTY, 
 					Insets.EMPTY)));
-			registerButton.setTextFill(palette.colorPalette.get("Secondary"));
+			registerButton.setTextFill(palette.colorPalette.get("Green"));
 			
 		});
 		
 		registerButton.setOnMouseExited(e -> {
 			
-			registerButton.setBackground(null);
-			registerButton.setTextFill(palette.colorPalette.get("Primary-Dark"));
+			loginButton.setBackground(
+					new Background(
+					new BackgroundFill(
+						palette.colorPalette.get("Yellow"),
+						new CornerRadii(3),
+						Insets.EMPTY)));
+			loginButton.setTextFill(Color.BLACK);
+			registerButton.setTextFill(palette.colorPalette.get("Yellow"));
 			
 		});
 		
 		loginButton.setOnMouseEntered(e -> {
 			
-			loginButton.setStyle("-fx-background-color: rgb(124, 180, 239)");
+			loginButton.setBackground(
+					new Background(
+					new BackgroundFill(
+						palette.colorPalette.get("Yellow"),
+						new CornerRadii(3),
+						Insets.EMPTY)));
+			loginButton.setTextFill(Color.BLACK);
 			
 		});
 		
 		loginButton.setOnMouseExited(e -> {
 			
-			loginButton.setStyle("-fx-background-color: rgb(4, 108, 228)");
+			loginButton.setBackground(
+					new Background(
+					new BackgroundFill(
+						Color.BLACK,
+						new CornerRadii(3),
+						Insets.EMPTY)));
+			loginButton.setTextFill(palette.colorPalette.get("Yellow"));
 			
 		});
 		

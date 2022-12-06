@@ -36,9 +36,9 @@ public class Main extends Application{
 		stage.setWidth(1000);
 		stage.setHeight(600);
 		stage.setResizable(false);
-		stage.setTitle("Travelol");
+		stage.setTitle("PaKCman");
 		
-		String path = "file:assets/logo/Travelol-logos.jpeg";
+		String path = "file:assets/logo/pacman-logo.png";
 		Image icon = new Image(path);
 		stage.getIcons().add(icon);
 		

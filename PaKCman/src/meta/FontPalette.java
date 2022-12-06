@@ -8,7 +8,7 @@ public class FontPalette {
 
 	public static Font titleFont = Font.font("Sans-Serif", 
 										FontWeight.BOLD, 
-										FontPosture.REGULAR, 40);
+										FontPosture.REGULAR, 60);
 	
 	public static Font subtitleFont = Font.font("Sans-Serif", 
 										   FontWeight.NORMAL, 

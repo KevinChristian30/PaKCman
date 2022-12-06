@@ -13,9 +13,12 @@ public class ColorPalette {
 		
 		colorPalette = new HashMap<>();
 		
-		colorPalette.put("Primary-Dark", Color.rgb(4, 108, 228));
-		colorPalette.put("Primary-Light", Color.rgb(124, 180, 239));
-		colorPalette.put("Secondary", Color.WHITE);
+		colorPalette.put("Yellow", Color.rgb(255, 255, 0));
+		colorPalette.put("Dark-Blue", Color.rgb(25, 25, 166));
+		colorPalette.put("Blue", Color.rgb(33, 33, 222));
+		colorPalette.put("Beige", Color.rgb(222, 161, 133));
+		colorPalette.put("Red", Color.rgb(253, 0, 0));
+		colorPalette.put("Green", Color.rgb(0, 255, 0));
 		
 	}
 	
