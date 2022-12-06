@@ -16,7 +16,11 @@ import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -43,6 +47,7 @@ public class LoginScreenView extends Screen{
 		
 		initiateComponents();
 		designLayout();
+		setEventHandles();
 		setScene();
 		
 	}
@@ -115,13 +120,27 @@ public class LoginScreenView extends Screen{
 					Color.BLACK, 5, 3.0f, 2.0f, 2.0f));
 		
  		loginFormLabel.setFont(FontPalette.titleFont);
- 		loginFormLabel.setPadding(new Insets(-70, 0, 100, 0));
+ 		loginFormLabel.setPadding(new Insets(-10, 0, 100, 0));
 		right.getChildren().add(loginFormLabel);
 		
 		usernameLabel.setFont(FontPalette.subtitleFont);
 		passwordLabel.setFont(FontPalette.subtitleFont);
-		usernameTextField.setPrefSize(250, 20);
-		passwordPasswordField.setPrefSize(250, 20);
+		usernameTextField.setPrefSize(250, 30);
+		usernameTextField.setBorder(
+			new Border(
+			new BorderStroke(
+				Color.BLACK,
+				BorderStrokeStyle.SOLID,
+				CornerRadii.EMPTY,
+				BorderWidths.DEFAULT)));
+		passwordPasswordField.setPrefSize(250, 30);
+		passwordPasswordField.setBorder(
+				new Border(
+				new BorderStroke(
+					Color.BLACK,
+					BorderStrokeStyle.SOLID,
+					CornerRadii.EMPTY,
+					BorderWidths.DEFAULT)));
 		
 		formContainer.add(usernameLabel, 0, 0);
 		formContainer.add(usernameTextField, 1, 0);
@@ -129,19 +148,68 @@ public class LoginScreenView extends Screen{
 		formContainer.add(passwordPasswordField, 1, 1);
 		formContainer.setPadding(new Insets(0, 0, 0, 33));
 		formContainer.setHgap(10);
-		formContainer.setVgap(5);
+		formContainer.setVgap(10);
 		right.getChildren().add(formContainer);
 		
-		VBox.setMargin(loginButton, new Insets(30, 0, 0, 0));
-		loginButton.setPrefSize(150, 20);
+		loginButton.setPrefSize(250, 30);
+		loginButton.setBackground(
+			new Background(
+			new BackgroundFill(
+				palette.colorPalette.get("Primary-Dark"),
+				CornerRadii.EMPTY,
+				Insets.EMPTY)));
+		loginButton.setTextFill(palette.colorPalette.get("Secondary"));
+		loginButton.setFont(FontPalette.subtitleFont);
+		VBox.setMargin(loginButton, new Insets(30, 0, 40, 73));
 		right.getChildren().add(loginButton);
 		
 		registerContainer.getChildren().add(registerLabel);
 		registerContainer.getChildren().add(registerButton);
+		registerContainer.setPadding(new Insets(0, 0, 0, 33));
 		right.getChildren().add(registerContainer);
 		
+		registerButton.setBackground(null);
+		registerButton.setPadding(new Insets(0));
+		registerButton.setTextFill(palette.colorPalette.get("Primary-Dark"));
+		registerButton.setStyle("-fx-font-weight: bold");
 		right.setAlignment(Pos.CENTER);
 		
 	}
 	
+	protected void setEventHandles() {
+		
+		registerButton.setOnMouseEntered(e -> {
+			
+			registerButton.setBackground(
+				new Background(
+				new BackgroundFill(
+					palette.colorPalette.get("Primary-Dark"), 
+					CornerRadii.EMPTY, 
+					Insets.EMPTY)));
+			registerButton.setTextFill(palette.colorPalette.get("Secondary"));
+			
+		});
+		
+		registerButton.setOnMouseExited(e -> {
+			
+			registerButton.setBackground(null);
+			registerButton.setTextFill(palette.colorPalette.get("Primary-Dark"));
+			
+		});
+		
+		loginButton.setOnMouseEntered(e -> {
+			
+			loginButton.setStyle("-fx-background-color: rgb(124, 180, 239)");
+			
+		});
+		
+		loginButton.setOnMouseExited(e -> {
+			
+			loginButton.setStyle("-fx-background-color: rgb(4, 108, 228)");
+			
+		});
+		
+	}
+	
 }
+;

@@ -13,6 +13,8 @@ public abstract class Screen {
 	
 	protected abstract void designLayout();
 	
+	protected abstract void setEventHandles();
+	
 	public void setScene() {
 		
 		Main.getStage().setScene(scene);
