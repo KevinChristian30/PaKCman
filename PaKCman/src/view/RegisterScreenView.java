@@ -9,7 +9,11 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
@@ -67,6 +71,14 @@ public class RegisterScreenView extends Screen{
 					new Insets(0))));
 		layout.getChildren().add(registerScreenLabel);
 		layout.setAlignment(Pos.CENTER);
+//		layout.setPrefSize(400, 400);
+//		layout.setBorder(
+//				new Border(
+//				new BorderStroke(
+//					palette.colorPalette.get("Yellow"),
+//					BorderStrokeStyle.SOLID,
+//					new CornerRadii(3),
+//					new BorderWidths(2))));
 		
 		formContainer.add(usernameLabel, 0, 0);
 		formContainer.add(usernameTextField, 1, 0);
