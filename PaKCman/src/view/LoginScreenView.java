@@ -1,5 +1,6 @@
 package view;
 
+import controller.LoginScreenController;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -215,6 +216,12 @@ public class LoginScreenView extends Screen{
 						Insets.EMPTY)));
 			loginButton.setTextFill(Color.BLACK);
 			registerButton.setTextFill(palette.colorPalette.get("Yellow"));
+			
+		});
+		
+		registerButton.setOnMouseClicked(e -> {
+			
+			LoginScreenController.routeToRegisterScreen();
 			
 		});
 		
