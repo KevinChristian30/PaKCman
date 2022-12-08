@@ -30,7 +30,6 @@ import javafx.scene.paint.Color;
 import meta.ColorPalette;
 import meta.FontPalette;
 import model.Screen;
-import utility.PasswordHasher;
 
 public class RegisterScreenView extends Screen{
 	

@@ -37,7 +37,8 @@ public class LoginScreenView extends Screen{
 	GridPane layout;
 		
 	VBox left, right;
-	Label loginFormLabel, usernameLabel, passwordLabel, registerLabel;
+	Label loginFormLabel, usernameLabel, passwordLabel, 
+		registerLabel, errorLabel;
 	TextField usernameTextField;
 	PasswordField passwordPasswordField;
 	GridPane formContainer;
@@ -68,6 +69,7 @@ public class LoginScreenView extends Screen{
 		loginFormLabel = new Label("PaKCman!");
 		usernameLabel = new Label("Username");
 		passwordLabel = new Label("Password");
+		errorLabel = new Label("");
 		usernameTextField = new TextField();
 		passwordPasswordField = new PasswordField();
 		formContainer = new GridPane();
@@ -150,10 +152,13 @@ public class LoginScreenView extends Screen{
 		passwordPasswordField.setBackground(null);
 		passwordPasswordField.setStyle("-fx-text-fill: rgb(255, 255, 0)");
 		
+		errorLabel.setTextFill(Color.RED);
+		
 		formContainer.add(usernameLabel, 0, 0);
 		formContainer.add(usernameTextField, 1, 0);
 		formContainer.add(passwordLabel, 0, 1);
 		formContainer.add(passwordPasswordField, 1, 1);
+		formContainer.add(errorLabel, 1, 3);
 		formContainer.setPadding(new Insets(0, 0, 50, 33));
 		formContainer.setHgap(10);
 		formContainer.setVgap(10);
@@ -249,7 +254,42 @@ public class LoginScreenView extends Screen{
 			
 		});
 		
+		loginButton.setOnMouseClicked(e -> {
+			
+			String username = usernameTextField.getText();
+			String password = passwordPasswordField.getText();
+			
+			if (username.length() == 0) {
+				
+				errorLabel.setText("Please Fill your Username");
+				
+			} else if (password.length() == 0) {
+				
+				errorLabel.setText("Please Fill your Password");
+				
+			} else {
+				
+				int loginStatus = 
+					LoginScreenController.attemptLogIn(username, password);
+				
+				if (loginStatus == -1) {
+					
+					errorLabel.setText("Username Not Found");
+					
+				} else if (loginStatus == -2) {
+					
+					errorLabel.setText("Invalid Password");
+					
+				} else {
+					
+					errorLabel.setText("Logging you in");
+					
+				}
+				
+			}
+			
+		});
+		
 	}
 	
 }
-;
