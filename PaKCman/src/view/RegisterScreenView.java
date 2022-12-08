@@ -30,6 +30,7 @@ import javafx.scene.paint.Color;
 import meta.ColorPalette;
 import meta.FontPalette;
 import model.Screen;
+import utility.PasswordHasher;
 
 public class RegisterScreenView extends Screen{
 	
@@ -37,7 +38,8 @@ public class RegisterScreenView extends Screen{
 	VBox layout;
 	GridPane formContainer;
 	
-	Label registerScreenLabel, usernameLabel, passwordLabel, loginLabel;
+	Label registerScreenLabel, usernameLabel, passwordLabel, 
+			loginLabel, errorLabel;
 	TextField usernameTextField;
 	PasswordField passwordPasswordField;
 	Button registerButton, loginScreenButton;
@@ -62,6 +64,7 @@ public class RegisterScreenView extends Screen{
 		usernameLabel = new Label("Username");
 		passwordLabel = new Label("Password");
 		loginLabel = new Label("Already have an account? Login ");
+		errorLabel = new Label("");
 		usernameTextField = new TextField();
 		passwordPasswordField = new PasswordField();
 		registerButton = new Button("Register");
@@ -164,11 +167,14 @@ public class RegisterScreenView extends Screen{
 		loginLabel.setTextFill(
 				palette.colorPalette.get("Yellow"));
 		
+		errorLabel.setTextFill(Color.RED);
+		
 		formContainer.add(usernameLabel, 0, 0);
 		formContainer.add(usernameTextField, 1, 0);
 		formContainer.add(passwordLabel, 0, 1);
 		formContainer.add(passwordPasswordField, 1, 1);
 		formContainer.add(registerButton, 1, 2);
+		formContainer.add(errorLabel, 1, 3);
 		formContainer.setAlignment(Pos.CENTER);
 		formContainer.setHgap(10);
 		formContainer.setVgap(10);
@@ -178,7 +184,6 @@ public class RegisterScreenView extends Screen{
 		VBox.setMargin(loginContainer, new Insets(50, 0, 0, 0));
 		
 		loginScreenButton.setFont(FontPalette.subtitleFont);
-		loginScreenButton.setTextFill(palette.colorPalette.get("Red"));
 		loginScreenButton.setPadding(new Insets(0));
 		
 		loginScreenButton.setBackground(
@@ -187,7 +192,7 @@ public class RegisterScreenView extends Screen{
 					Color.BLACK,
 					new CornerRadii(3),
 					Insets.EMPTY)));
-		loginScreenButton.setTextFill(palette.colorPalette.get("Yellow"));
+		loginScreenButton.setTextFill(palette.colorPalette.get("Red"));
 		
 		loginContainer.getChildren().addAll(loginLabel, loginScreenButton);
 		layout.getChildren().add(loginContainer);
@@ -218,7 +223,7 @@ public class RegisterScreenView extends Screen{
 						Color.BLACK,
 						new CornerRadii(3),
 						Insets.EMPTY)));
-			loginScreenButton.setTextFill(palette.colorPalette.get("Yellow"));
+			loginScreenButton.setTextFill(palette.colorPalette.get("Red"));
 			
 		});
 		
@@ -249,6 +254,34 @@ public class RegisterScreenView extends Screen{
 						new CornerRadii(3),
 						Insets.EMPTY)));
 			registerButton.setTextFill(palette.colorPalette.get("Yellow"));
+			
+		});
+		
+		registerButton.setOnMouseClicked(e -> {
+			
+			String username = usernameTextField.getText();
+			String password = passwordPasswordField.getText();
+			
+			if (username.length() < 5) {
+				
+				errorLabel.setText("Username must be at "
+						+ "least 5 characters long");
+				
+			} else if (password.length() < 8) {
+				
+				errorLabel.setText("Password must be at "
+						+ "least 8 characters long");
+				
+			} else {
+				
+				errorLabel.setText("");
+				if (RegisterScreenController.attemptRegister
+					(username, password)) new LoginScreenView();
+				else {
+					errorLabel.setText("Username Already Exist");
+				}
+				
+			}
 			
 		});
 		
