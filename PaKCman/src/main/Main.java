@@ -54,9 +54,9 @@ public class Main extends Application{
 		initiateStage();
 		initiateMetaData();
 		stage.show();
-//		new LoginScreenView();
+		new LoginScreenView();
 		
-		new MenuScreenView(new Player("Kevin", "abc", 100));
+//		new MenuScreenView(new Player("Kevin", "abc", 100));
 		
 	}
 
