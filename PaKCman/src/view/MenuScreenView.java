@@ -78,10 +78,10 @@ public class MenuScreenView extends Screen {
 			)));
 		
 		usernameLabel.setFont(FontPalette.subtitleFont);
-		usernameLabel.setPadding(new Insets(30, 0, 0, 30));
+		usernameLabel.setPadding(new Insets(0, 0, 0, 0));
 		usernameLabel.setStyle("-fx-font-weight: bold");
-		usernameLabel.setTextFill(Color.GREY);
-		layoutContainer.setTop(usernameLabel);
+		usernameLabel.setTextFill(palette.colorPalette.get("Yellow"));
+		layoutContainer.setCenter(usernameLabel);
 		
 		playButton.setBackground(null);
 		optionsButton.setBackground(null);
@@ -123,6 +123,103 @@ public class MenuScreenView extends Screen {
 
 	@Override
 	protected void setEventHandles() {
+		
+		playButton.setOnMouseEntered(e -> {
+			
+			playButton.setBackground(null);
+			playButton.setTextFill(palette.colorPalette.get("Green"));
+			playButton.setStyle("-fx-font-weight: bold");
+			playButton.setFont(FontPalette.menuButtonFont);
+			
+			
+		});
+		
+		playButton.setOnMouseExited(e -> {
+			
+			playButton.setBackground(null);
+			playButton.setTextFill(palette.colorPalette.get("Yellow"));
+			playButton.setStyle("-fx-font-weight: bold");
+			playButton.setFont(FontPalette.menuButtonFont);
+			
+		});
+		
+		playButton.setOnMouseClicked(e -> {
+			
+			
+		});
+		
+		optionsButton.setOnMouseEntered(e -> {
+			
+			optionsButton.setBackground(null);
+			optionsButton.setTextFill(palette.colorPalette.get("Green"));
+			optionsButton.setStyle("-fx-font-weight: bold");
+			optionsButton.setFont(FontPalette.menuButtonFont);
+			
+			
+		});
+		
+		optionsButton.setOnMouseExited(e -> {
+			
+			optionsButton.setBackground(null);
+			optionsButton.setTextFill(palette.colorPalette.get("Yellow"));
+			optionsButton.setStyle("-fx-font-weight: bold");
+			optionsButton.setFont(FontPalette.menuButtonFont);
+			
+		});
+		
+		optionsButton.setOnMouseClicked(e -> {
+			
+			
+		});
+		
+		leaderboardButton.setOnMouseEntered(e -> {
+			
+			leaderboardButton.setBackground(null);
+			leaderboardButton.setTextFill(palette.colorPalette.get("Green"));
+			leaderboardButton.setStyle("-fx-font-weight: bold");
+			leaderboardButton.setFont(FontPalette.menuButtonFont);
+			
+			
+		});
+		
+		leaderboardButton.setOnMouseExited(e -> {
+			
+			leaderboardButton.setBackground(null);
+			leaderboardButton.setTextFill(palette.colorPalette.get("Yellow"));
+			leaderboardButton.setStyle("-fx-font-weight: bold");
+			leaderboardButton.setFont(FontPalette.menuButtonFont);
+			
+		});
+		
+		leaderboardButton.setOnMouseClicked(e -> {
+			
+			
+		});
+		
+		logOutButton.setOnMouseEntered(e -> {
+			
+			logOutButton.setBackground(null);
+			logOutButton.setTextFill(palette.colorPalette.get("Green"));
+			logOutButton.setStyle("-fx-font-weight: bold");
+			logOutButton.setFont(FontPalette.menuButtonFont);
+			
+			
+		});
+		
+		logOutButton.setOnMouseExited(e -> {
+			
+			logOutButton.setBackground(null);
+			logOutButton.setTextFill(palette.colorPalette.get("Yellow"));
+			logOutButton.setStyle("-fx-font-weight: bold");
+			logOutButton.setFont(FontPalette.menuButtonFont);
+			
+		});
+		
+		logOutButton.setOnMouseClicked(e -> {
+			
+			
+		});
+		
 		
 	}
 	
