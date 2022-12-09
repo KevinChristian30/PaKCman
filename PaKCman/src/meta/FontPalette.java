@@ -14,4 +14,8 @@ public class FontPalette {
 										   FontWeight.NORMAL, 
 										   	FontPosture.REGULAR, 15);
 	
+	public static Font menuButtonFont = Font.font("Sans-Serif", 
+										   FontWeight.NORMAL, 
+										   	FontPosture.REGULAR, 16);
+	
 }

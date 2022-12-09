@@ -83,7 +83,7 @@ public class RegisterScreenView extends Screen{
 		layoutContainer.setBackground(
 				new Background(
 				new BackgroundImage(
-					new Image("file:./assets/register-view/galaxy.jpg"),
+					new Image("file:./assets/register-view/gameplay.jpg"),
 					BackgroundRepeat.NO_REPEAT,
 					BackgroundRepeat.NO_REPEAT,
 					BackgroundPosition.CENTER,

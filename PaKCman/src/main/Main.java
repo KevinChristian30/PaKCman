@@ -5,7 +5,10 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import model.models.Player;
 import view.LoginScreenView;
+import view.MenuScreenView;
+import view.RegisterScreenView;
 
 public class Main extends Application{
 
@@ -51,7 +54,9 @@ public class Main extends Application{
 		initiateStage();
 		initiateMetaData();
 		stage.show();
-		new LoginScreenView();
+//		new LoginScreenView();
+		
+		new MenuScreenView(new Player("Kevin", "abc", 100));
 		
 	}
 
