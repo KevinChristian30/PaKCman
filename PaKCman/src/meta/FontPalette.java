@@ -18,4 +18,8 @@ public class FontPalette {
 										   FontWeight.NORMAL, 
 										   	FontPosture.REGULAR, 16);
 	
+	public static Font leaderboardFont = Font.font("Sans-Serif", 
+			   FontWeight.NORMAL, 
+			   	FontPosture.REGULAR, 40);
+	
 }

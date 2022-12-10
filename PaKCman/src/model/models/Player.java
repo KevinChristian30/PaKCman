@@ -2,6 +2,7 @@ package model.models;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import utility.Connect;
 
@@ -83,6 +84,32 @@ public class Player implements Model {
 		} catch (SQLException e) {}
 		
 		return null;
+	}
+	
+	public static ArrayList<Player> readAll(){
+		
+		Connect connection = Connect.getInstance();
+		String query = "SELECT * FROM MsPlayer;";
+		ResultSet result = connection.executeQuery(query);
+		
+		ArrayList<Player> players = new ArrayList<>();
+		
+		try {
+			
+			while (result.next()) {
+				
+				String playerName = result.getString("PlayerName");
+				String password = result.getString("PlayerPassword");
+				int highScore = result.getInt("PlayerHighScore");
+			
+				players.add(new Player(playerName, password, highScore));
+				
+			}
+			
+		} catch (SQLException e) {}
+		
+		return players;
+		
 	}
 
 	@Override

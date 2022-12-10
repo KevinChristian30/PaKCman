@@ -19,4 +19,10 @@ public class SoundPlayer {
 		
 	}
 	
+	public static void stopMusic() {
+		
+		mediaPlayer.stop();
+		
+	}
+	
 }

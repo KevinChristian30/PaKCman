@@ -1,5 +1,6 @@
 package view;
 
+import controller.MenuScreenController;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -193,6 +194,7 @@ public class MenuScreenView extends Screen {
 		
 		leaderboardButton.setOnMouseClicked(e -> {
 			
+			MenuScreenController.routeToLeaderboardScreen();
 			
 		});
 		
@@ -216,6 +218,10 @@ public class MenuScreenView extends Screen {
 		});
 		
 		logOutButton.setOnMouseClicked(e -> {
+			
+			
+			SoundPlayer.stopMusic();
+			MenuScreenController.routeToLoginScreen();
 			
 			
 		});
