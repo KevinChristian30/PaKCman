@@ -4,7 +4,6 @@ import controller.MenuScreenController;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.effect.BlurType;
 import javafx.scene.effect.DropShadow;
@@ -31,7 +30,7 @@ public class MenuScreenView extends Screen {
 	BorderPane layoutContainer;
 	Label usernameLabel;
 	
-	Button playButton, optionsButton, 
+	Label playButton, optionsButton, 
 	leaderboardButton, logOutButton;
 	VBox buttonContainer;
 
@@ -57,10 +56,10 @@ public class MenuScreenView extends Screen {
 		palette = ColorPalette.getInstance();
 		
 		usernameLabel = new Label("Welcome, " + player.getPlayerName());
-		playButton = new Button("Play");
-		optionsButton = new Button("Options");
-		leaderboardButton = new Button("Leaderboard");
-		logOutButton = new Button("Log Out");
+		playButton = new Label("Play");
+		optionsButton = new Label("Options");
+		leaderboardButton = new Label("Leaderboard");
+		logOutButton = new Label("Log Out");
 		buttonContainer = new VBox();
 		
 	}
@@ -118,6 +117,12 @@ public class MenuScreenView extends Screen {
 				palette.colorPalette.get("Blue"), 
 				7, 3.0f, 2.0f, 2.0f));
 		
+		Insets padding = new Insets(5, 0, 5, 0);
+		playButton.setPadding(padding);
+		optionsButton.setPadding(padding);
+		leaderboardButton.setPadding(padding);
+		logOutButton.setPadding(padding);
+		
 		layoutContainer.setBottom(buttonContainer);
 		
 	}
@@ -170,6 +175,7 @@ public class MenuScreenView extends Screen {
 		
 		optionsButton.setOnMouseClicked(e -> {
 			
+			MenuScreenController.routeToOptionsScreen(player);
 			
 		});
 		
@@ -194,7 +200,7 @@ public class MenuScreenView extends Screen {
 		
 		leaderboardButton.setOnMouseClicked(e -> {
 			
-			MenuScreenController.routeToLeaderboardScreen();
+			MenuScreenController.routeToLeaderboardScreen(player);
 			
 		});
 		

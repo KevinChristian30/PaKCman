@@ -20,6 +20,10 @@ public class FontPalette {
 	
 	public static Font leaderboardFont = Font.font("Sans-Serif", 
 			   FontWeight.NORMAL, 
-			   	FontPosture.REGULAR, 40);
+			   	FontPosture.REGULAR, 35);
+	
+	public static Font leaderboardTitleFont = Font.font("Sans-Serif", 
+			   FontWeight.NORMAL, 
+			   	FontPosture.REGULAR, 50);
 	
 }

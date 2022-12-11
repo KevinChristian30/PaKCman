@@ -6,6 +6,7 @@ import javafx.scene.effect.DropShadow;
 
 import java.util.ArrayList;
 
+import controller.LeaderboardScreenController;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -16,7 +17,11 @@ import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
@@ -28,16 +33,19 @@ import model.models.Player;
 public class LeaderboardScreenView extends Screen{
 
 	ArrayList<Player> players;
+	Player currentPlayer;
 	
 	BorderPane layoutContainer;
 	GridPane layout;
 	
 	Label[][] labels = new Label[6][3];
+	Label leaderboardScreenTitle;
+	Label backButton;
 	
-	
-	public LeaderboardScreenView(ArrayList<Player> players) {
+	public LeaderboardScreenView(ArrayList<Player> players, Player currentPlayer) {
 
 		this.players = players;
+		this.currentPlayer = currentPlayer;
 		
 		initiateComponents();
 		designLayout();
@@ -55,6 +63,9 @@ public class LeaderboardScreenView extends Screen{
 		for (int i = 0; i < 5; i++)
 			for (int j = 0; j < 2; j++)
 				labels[i][j] = new Label("");
+		
+		backButton = new Label("Back");
+		leaderboardScreenTitle = new Label("Highscores");
 		
 		scene = new Scene(layoutContainer);
 		palette = ColorPalette.getInstance();
@@ -106,6 +117,7 @@ public class LeaderboardScreenView extends Screen{
 					7, 3.0f, 2.0f, 2.0f));
 		layout.setAlignment(Pos.CENTER);
 		layout.setHgap(30);
+		layout.setPadding(new Insets(30, 0, 30, 0));
 		
 		for (int i = 0; i < 5; i++)
 			for (int j = 0; j < 2; j++) {
@@ -115,13 +127,80 @@ public class LeaderboardScreenView extends Screen{
 				labels[i][j].setStyle("-fx-font-weight: bold");
 			}
 		
+		leaderboardScreenTitle.setFont(FontPalette.leaderboardTitleFont);
+		leaderboardScreenTitle.setTextFill(
+				palette.colorPalette.get("Yellow"));
+		leaderboardScreenTitle.setStyle("-fx-font-weight: bold");
+		BorderPane.setAlignment(leaderboardScreenTitle, Pos.CENTER);
+		leaderboardScreenTitle.setBackground(
+				new Background(
+				new BackgroundFill(
+					Color.BLACK,
+					CornerRadii.EMPTY,
+					Insets.EMPTY
+				)));
+		leaderboardScreenTitle.setBorder(
+			new Border(
+			new BorderStroke(Color.YELLOW, Color.YELLOW, 
+							 Color.YELLOW,Color.YELLOW,
+							 BorderStrokeStyle.SOLID, BorderStrokeStyle.SOLID,
+							 BorderStrokeStyle.SOLID, BorderStrokeStyle.SOLID,
+							 new CornerRadii(5), 
+							 new BorderWidths(5), 
+							 Insets.EMPTY)));
+		
+		backButton.setFont(FontPalette.leaderboardFont);
+		backButton.setTextFill(
+				palette.colorPalette.get("Red"));
+		backButton.setStyle("-fx-font-weight: bold");
+		BorderPane.setAlignment(backButton, Pos.CENTER);
+		backButton.setBackground(
+				new Background(
+				new BackgroundFill(
+					Color.BLACK,
+					CornerRadii.EMPTY,
+					Insets.EMPTY
+				)));
+		backButton.setBorder(
+			new Border(
+			new BorderStroke(Color.YELLOW, Color.YELLOW, 
+							 Color.YELLOW,Color.YELLOW,
+							 BorderStrokeStyle.SOLID, BorderStrokeStyle.SOLID,
+							 BorderStrokeStyle.SOLID, BorderStrokeStyle.SOLID,
+							 new CornerRadii(5), 
+							 new BorderWidths(5), 
+							 Insets.EMPTY)));
+		
 		layoutContainer.setCenter(layout);
+		layoutContainer.setBottom(backButton);
+		layoutContainer.setTop(leaderboardScreenTitle);
 		
 	}
 
 	@Override
 	protected void setEventHandles() {
 		
+		backButton.setOnMouseEntered(e -> {
+			
+			backButton.setTextFill(
+					palette.colorPalette.get("Green"));
+			
+		});
+		
+		backButton.setOnMouseExited(e -> {
+			
+			backButton.setTextFill(
+					palette.colorPalette.get("Red"));
+			
+		});
+		
+		backButton.setOnMouseClicked(e -> {
+			
+			LeaderboardScreenController.routeToMenuScreen(currentPlayer);
+			
+		});
+		
 	}
 
 }
+;

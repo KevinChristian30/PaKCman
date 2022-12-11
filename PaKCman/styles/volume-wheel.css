@@ -1,0 +1,13 @@
+.slider{
+
+  -fx-background-color: yellow;
+  -fx-background-radius: 10px;
+  -fx-padding: 3px;
+  -fx-color: blue;
+  
+}
+
+
+.track{
+  -fx-background-color: black;
+}
