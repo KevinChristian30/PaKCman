@@ -151,6 +151,7 @@ public class MenuScreenView extends Screen {
 		
 		playButton.setOnMouseClicked(e -> {
 			
+			MenuScreenController.routeToPlayScreen(player);
 			
 		});
 		

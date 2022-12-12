@@ -7,6 +7,7 @@ import model.models.Player;
 import view.LeaderboardScreenView;
 import view.LoginScreenView;
 import view.OptionsScreenView;
+import view.PlayScreenView;
 
 public class MenuScreenController {
 
@@ -29,6 +30,12 @@ public class MenuScreenController {
 	public static void routeToOptionsScreen(Player player) {
 		
 		new OptionsScreenView(player);
+		
+	}
+	
+	public static void routeToPlayScreen(Player player) {
+		
+		new PlayScreenView(player);
 		
 	}
 	
