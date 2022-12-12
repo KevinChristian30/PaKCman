@@ -1,7 +1,5 @@
 package view;
 
-import java.time.LocalDateTime;
-
 import javafx.animation.AnimationTimer;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -33,6 +31,7 @@ public class PlayScreenView extends Screen{
 	public PlayScreenView(Player player) {
 		
 		this.player = player;
+		Main.getStage().setHeight(775);
 		
 		initiateComponents();
 		designLayout();
@@ -50,7 +49,7 @@ public class PlayScreenView extends Screen{
 		canvas = new Canvas(Main.getStage().getWidth(), Main.getStage().getHeight());
 		GC = canvas.getGraphicsContext2D();
 		
-		pacman = new Pacman(100, 100);
+		pacman = new Pacman(25, 25);
 		gameMap = new GameMap();
 
 		scene = new Scene(layoutContainer);
@@ -97,8 +96,8 @@ public class PlayScreenView extends Screen{
 	
 	private void render(){
 		
-		pacman.render(GC);
 		gameMap.render(GC);
+		pacman.render(GC);
 		
 	}
 	

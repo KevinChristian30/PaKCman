@@ -12,14 +12,49 @@ public class GameMap extends GameObject{
 
 	private final int WIDTH = 25;
 	
+	// 1000 / 25 = 40
+	// 750 / 25 = 30
+	
+	private final String[] map = {
+		"#######################################",
+		"#                  #                  #",
+		"# ###### ######### # ######### ###### #",
+		"# ###### ######### # ######### ###### #",
+		"#                                     #",
+		"# ###### # ################# # ###### #",
+		"#        #         #         #        #",
+		"# #    # ######### # ######### #    # #",
+		"# #### # #                   # # #### #",
+		"# #    # # ################# # #    # #",
+		"# # ####                       #### # #",
+		"# #    # # ######## ######## # #    # #",
+		"#        #                   #        #",
+		"######## ### ###### ###### ### ########",
+		"             #           #             ",
+		"######## # # ############# # # ########",		
+		"       # #                   # #       ",
+		"       # # ################# # #       ",
+		"       # #         #         # #       ",
+		"######## ######### # ######### ########",
+		"#                  #                  #",
+		"# ####### ######## # ######## ####### #",
+		"#      ##   #####  #  #####   ##      #",
+		"# #### ## #        #        # ## #### #",
+		"#    #  # ######## # ######## #  #    #",
+		"# ## ##            #            ## ## #",
+		"# ## ## ########## # ########## ## ## #",
+		"#                  #                  #",
+		"#######################################"
+	};
+	
 	public GameMap(){
 		
-		walls.add(new Wall(0, 0, WIDTH, Main.getStage().getHeight()));
-		walls.add(new Wall(0, 0, Main.getStage().getWidth(), WIDTH));
-		walls.add(new Wall(Main.getStage().getWidth() - WIDTH - 16, 0, 
-				WIDTH, Main.getStage().getHeight()));
-		walls.add(new Wall(0, Main.getStage().getHeight() - WIDTH - 39,
-				Main.getStage().getWidth(), WIDTH));
+		for (int i = 0; i < 29; i++)
+			for (int j = 0; j < 39; j++) {
+				if (map[i].charAt(j) == '#') {
+					walls.add(new Wall(j * WIDTH, i * WIDTH));
+				}
+			}		
 		
 	}
 	
@@ -29,7 +64,7 @@ public class GameMap extends GameObject{
 		walls.forEach(e -> {
 			
 			GC.setFill(ColorPalette.getInstance().colorPalette.get("Blue"));
-			GC.fillRect(e.positionX, e.positionY, e.width, e.height);
+			GC.fillRect(e.positionX, e.positionY, WIDTH, WIDTH);
 			
 		});
 		

@@ -70,8 +70,6 @@ public class Pacman extends GameObject implements IMovable{
 			
 		}
 		
-		
-		
 	}
 
 }
