@@ -31,7 +31,7 @@ public class PlayScreenView extends Screen{
 	public PlayScreenView(Player player) {
 		
 		this.player = player;
-		Main.getStage().setHeight(775);
+		Main.getStage().setHeight(725);
 		
 		initiateComponents();
 		designLayout();

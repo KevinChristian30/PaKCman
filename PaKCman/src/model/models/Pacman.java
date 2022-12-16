@@ -4,6 +4,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.ArcType;
+import main.Main;
 import model.interfaces.IMovable;
 
 public class Pacman extends GameObject implements IMovable{
@@ -11,6 +12,8 @@ public class Pacman extends GameObject implements IMovable{
 	public final int SPEED = 5;
 	public final int WIDTH = 25;
 	public int positionX, positionY;
+	
+	boolean collide;
 	
 	public KeyCode currentKey;
 	
@@ -50,24 +53,44 @@ public class Pacman extends GameObject implements IMovable{
 		positionX += SPEED;
 	}
 	
+	private boolean isColliding() {
+		
+		for (Wall e : GameMap.walls) {
+			if(positionX < e.positionX + e.width &&
+				positionX + WIDTH > e.positionX &&
+				positionY < e.positionY + e.width &&
+				positionY + WIDTH > e.positionY)
+				return true;
+		}
+		return false;
+		
+	}
+	
 	public void change() {
 		
+		collide = false;
 		if (currentKey == KeyCode.W || currentKey == KeyCode.UP) {
 			
-			moveUp();
+			if (!isColliding()) moveUp();
 			
 		} else if (currentKey == KeyCode.A || currentKey == KeyCode.LEFT) {
 			
-			moveLeft();
+			if (!isColliding()) moveLeft();
 			
 		} else if (currentKey == KeyCode.S || currentKey == KeyCode.DOWN) {
 			
-			moveDown();
+			if (!isColliding()) moveDown();
 			
 		} else if (currentKey == KeyCode.D || currentKey == KeyCode.RIGHT) {
 			
-			moveRight();
+			if (!isColliding()) moveRight();
 			
+		}
+		
+		if (positionX >= Main.getStage().getWidth()) {
+			positionX = 0;
+		} else if (positionX < 0) {
+			positionX = (int) Main.getStage().getWidth();
 		}
 		
 	}
