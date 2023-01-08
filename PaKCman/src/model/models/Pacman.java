@@ -9,8 +9,9 @@ import model.interfaces.IMovable;
 
 public class Pacman extends GameObject implements IMovable{
 	
-	public final int SPEED = 5;
-	public final int WIDTH = 25;
+	public int SPEEDX = 5;
+	public int SPEEDY = 5;
+	public final int WIDTH = 20;
 	public int positionX, positionY;
 	
 	boolean collide;
@@ -35,32 +36,33 @@ public class Pacman extends GameObject implements IMovable{
 
 	@Override
 	public void moveUp() {
-		positionY -= SPEED;
+		positionY -= SPEEDY;
 	}
 
 	@Override
 	public void moveDown() {
-		positionY += SPEED;
+		positionY += SPEEDY;
 	}
 
 	@Override
 	public void moveLeft() {
-		positionX -= SPEED;
+		positionX -= SPEEDX;
 	}
 
 	@Override
 	public void moveRight() {
-		positionX += SPEED;
+		positionX += SPEEDX;
 	}
 	
-	private boolean isColliding() {
+	private boolean collideWithWall() {
 		
 		for (Wall e : GameMap.walls) {
-			if(positionX < e.positionX + e.width &&
-				positionX + WIDTH > e.positionX &&
-				positionY < e.positionY + e.width &&
-				positionY + WIDTH > e.positionY)
+			if(positionX - SPEEDX < e.positionX + e.width &&
+				positionX + WIDTH + SPEEDX > e.positionX &&
+				positionY - SPEEDY < e.positionY + e.width &&
+				positionY + WIDTH + SPEEDY > e.positionY) {
 				return true;
+			}
 		}
 		return false;
 		
@@ -68,22 +70,42 @@ public class Pacman extends GameObject implements IMovable{
 	
 	public void change() {
 		
-		collide = false;
 		if (currentKey == KeyCode.W || currentKey == KeyCode.UP) {
 			
-			if (!isColliding()) moveUp();
+			if (collideWithWall()) {
+				positionY = positionY + SPEEDY;
+				currentKey = null;
+			} else {
+				moveUp();
+			}
+			
 			
 		} else if (currentKey == KeyCode.A || currentKey == KeyCode.LEFT) {
 			
-			if (!isColliding()) moveLeft();
+			if (collideWithWall()) {
+				positionX = positionX + SPEEDX;
+				currentKey = null;
+			} else {
+				moveLeft();
+			}
 			
 		} else if (currentKey == KeyCode.S || currentKey == KeyCode.DOWN) {
 			
-			if (!isColliding()) moveDown();
+			if (collideWithWall()) {
+				positionY = positionY - SPEEDY;
+				currentKey = null;
+			} else {
+				moveDown();
+			}
 			
 		} else if (currentKey == KeyCode.D || currentKey == KeyCode.RIGHT) {
 			
-			if (!isColliding()) moveRight();
+			if (collideWithWall()) {
+				positionX = positionX - SPEEDX;
+				currentKey = null;
+			} else {
+				moveRight();
+			}
 			
 		}
 		

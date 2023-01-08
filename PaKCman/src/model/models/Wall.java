@@ -8,7 +8,7 @@ public class Wall {
 		super();
 		this.positionX = positionX;
 		this.positionY = positionY;
-		this.width = this.height = 25;
+		this.width = this.height = 30;
 	}
 	
 	

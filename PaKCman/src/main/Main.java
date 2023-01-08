@@ -54,7 +54,7 @@ public class Main extends Application{
 		initiateStage();
 		initiateMetaData();
 		stage.show();
-		new LoginScreenView();
+//		new LoginScreenView();
 		
 		new PlayScreenView(new Player("Kevin", "abc", 200));
 		

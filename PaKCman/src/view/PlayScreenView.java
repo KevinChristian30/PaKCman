@@ -31,7 +31,8 @@ public class PlayScreenView extends Screen{
 	public PlayScreenView(Player player) {
 		
 		this.player = player;
-		Main.getStage().setHeight(725);
+		Main.getStage().setHeight(690);
+		Main.getStage().setWidth(976);
 		
 		initiateComponents();
 		designLayout();
@@ -49,7 +50,7 @@ public class PlayScreenView extends Screen{
 		canvas = new Canvas(Main.getStage().getWidth(), Main.getStage().getHeight());
 		GC = canvas.getGraphicsContext2D();
 		
-		pacman = new Pacman(25, 25);
+		pacman = new Pacman(35, 35);
 		gameMap = new GameMap();
 
 		scene = new Scene(layoutContainer);
