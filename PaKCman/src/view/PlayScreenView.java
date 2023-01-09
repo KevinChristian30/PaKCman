@@ -1,18 +1,24 @@
 package view;
 
+import java.util.ArrayList;
+import controller.EndGameScreenController;
 import javafx.animation.AnimationTimer;
-import javafx.geometry.Pos;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import main.Main;
 import meta.ColorPalette;
+import meta.FontPalette;
 import model.Screen;
+import model.models.Food;
 import model.models.GameMap;
 import model.models.Pacman;
 import model.models.Player;
@@ -21,12 +27,18 @@ public class PlayScreenView extends Screen{
 	
 	Player player;
 	
-	StackPane layoutContainer;
+	BorderPane layoutContainer;
 	Canvas canvas;
 	GraphicsContext GC;
 	
 	Pacman pacman;
 	GameMap gameMap;
+	ArrayList<Food> foods;
+	
+	public static Integer score, lives;
+	Label scoreLabel, livesLabel;
+	
+	GridPane informationContainer;
 	
 	public PlayScreenView(Player player) {
 		
@@ -46,8 +58,10 @@ public class PlayScreenView extends Screen{
 	@Override
 	protected void initiateComponents() {
 		
-		layoutContainer = new StackPane();
-		canvas = new Canvas(Main.getStage().getWidth(), Main.getStage().getHeight());
+		layoutContainer = new BorderPane();
+		canvas = new Canvas(Main.getStage().getWidth(), 
+				Main.getStage().getHeight() - 100);
+		
 		GC = canvas.getGraphicsContext2D();
 		
 		pacman = new Pacman(35, 35);
@@ -56,18 +70,39 @@ public class PlayScreenView extends Screen{
 		scene = new Scene(layoutContainer);
 		palette = ColorPalette.getInstance();
 		
+		informationContainer = new GridPane();
+		
+		score = 0;
+		lives = 3;
+		
 	}
 
 	@Override
 	protected void designLayout() {
 		
-		layoutContainer.getChildren().add(canvas);
-		
+		layoutContainer.setTop(canvas);
 		layoutContainer.setBackground(
 				new Background(
 				new BackgroundFill(Color.BLACK, null, null)));
 		layoutContainer.setPrefSize(Main.getStage().getWidth(), Main.getStage().getHeight());
-		layoutContainer.setAlignment(Pos.TOP_LEFT);
+		
+		livesLabel = new Label();
+		scoreLabel = new Label();
+		
+		livesLabel.setFont(FontPalette.menuButtonFont);
+		livesLabel.setPadding(new Insets(20, 0, 70, 0));
+		livesLabel.setTextFill(palette.colorPalette.get("Yellow"));
+		
+		scoreLabel.setFont(FontPalette.menuButtonFont);
+		scoreLabel.setPadding(new Insets(20, 0, 70, 0));
+		scoreLabel.setTextFill(palette.colorPalette.get("Yellow"));
+		
+		informationContainer.add(livesLabel, 0, 0);
+		informationContainer.add(scoreLabel, 1, 0);
+		layoutContainer.setCenter(informationContainer);
+		informationContainer.setHgap(100);
+		BorderPane.setMargin(informationContainer, 
+				new Insets(-20, 0, 0, 75));
 		
 		GC.fillRect(0, 0, 100, 100);
 		
@@ -110,7 +145,18 @@ public class PlayScreenView extends Screen{
 	
 	private void change() {
 		
+		livesLabel.setText("Lives: " + lives.toString());
+		scoreLabel.setText("Score: " + score.toString());
 		pacman.change();
+		
+	}
+	
+	
+	private void checkGameFinished() {
+		
+		if (GameMap.foods.isEmpty()) {
+			EndGameScreenController.routeToVictoryScreen();
+		}
 		
 	}
 	
@@ -130,6 +176,7 @@ public class PlayScreenView extends Screen{
 					clear();
 					render();
 					change();
+					checkGameFinished();
 					
 				}
 				

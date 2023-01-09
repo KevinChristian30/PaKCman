@@ -6,6 +6,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.ArcType;
 import main.Main;
 import model.interfaces.IMovable;
+import view.PlayScreenView;
 
 public class Pacman extends GameObject implements IMovable{
 	
@@ -68,6 +69,21 @@ public class Pacman extends GameObject implements IMovable{
 		
 	}
 	
+	private void collideWithFood() {
+		
+		for (Food e : GameMap.foods) {
+			if(positionX <= e.getPositionX() + Food.FOODWIDTH &&
+				positionX + WIDTH >= e.getPositionX() &&
+				positionY <= e.getPositionY() + Food.FOODWIDTH &&
+				positionY + WIDTH >= e.getPositionY()) {
+				GameMap.foods.remove(e);
+				PlayScreenView.score += 100;
+				break;
+			}
+		}
+		
+	}
+	
 	public void change() {
 		
 		if (currentKey == KeyCode.W || currentKey == KeyCode.UP) {
@@ -108,12 +124,15 @@ public class Pacman extends GameObject implements IMovable{
 			}
 			
 		}
+
+		collideWithFood();
 		
 		if (positionX >= Main.getStage().getWidth()) {
 			positionX = 0;
 		} else if (positionX < 0) {
 			positionX = (int) Main.getStage().getWidth();
 		}
+		
 		
 	}
 
