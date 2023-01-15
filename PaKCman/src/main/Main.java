@@ -9,6 +9,7 @@ import model.models.Player;
 import view.LoginScreenView;
 import view.MenuScreenView;
 import view.PlayScreenView;
+import view.VictoryScreenView;
 
 public class Main extends Application{
 
@@ -54,9 +55,9 @@ public class Main extends Application{
 		initiateStage();
 		initiateMetaData();
 		stage.show();
-		new LoginScreenView();
+//		new LoginScreenView();
 		
-//		new PlayScreenView(new Player("Kevin", "abc", 200));
+		new PlayScreenView(new Player("Kevin", "abc", 100));
 		
 	}
 

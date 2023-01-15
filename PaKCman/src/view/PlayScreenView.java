@@ -20,18 +20,21 @@ import meta.FontPalette;
 import model.Screen;
 import model.models.Food;
 import model.models.GameMap;
+import model.models.Ghost;
 import model.models.Pacman;
 import model.models.Player;
+import utility.SoundPlayer;
 
 public class PlayScreenView extends Screen{
 	
 	Player player;
+	ArrayList<Ghost> ghosts;
 	
 	BorderPane layoutContainer;
 	Canvas canvas;
 	GraphicsContext GC;
 	
-	Pacman pacman;
+	public static Pacman pacman;
 	GameMap gameMap;
 	ArrayList<Food> foods;
 	
@@ -64,7 +67,10 @@ public class PlayScreenView extends Screen{
 		
 		GC = canvas.getGraphicsContext2D();
 		
+		ghosts = new ArrayList<>();
 		pacman = new Pacman(35, 35);
+		ghosts.add(new Ghost(35, 515, Color.RED));
+//		ghosts.add(new Ghost(510, 35, Color.GREEN));
 		gameMap = new GameMap();
 
 		scene = new Scene(layoutContainer);
@@ -134,6 +140,7 @@ public class PlayScreenView extends Screen{
 		
 		gameMap.render(GC);
 		pacman.render(GC);
+		ghosts.forEach(e -> e.render(GC));
 		
 	}
 	
@@ -148,15 +155,30 @@ public class PlayScreenView extends Screen{
 		livesLabel.setText("Lives: " + lives.toString());
 		scoreLabel.setText("Score: " + score.toString());
 		pacman.change();
+		ghosts.forEach(e -> e.change());
 		
 	}
 	
-	
-	private void checkGameFinished() {
+	private void checkCollideWithEnemy() {
 		
-		if (GameMap.foods.isEmpty()) {
-			EndGameScreenController.routeToVictoryScreen();
+		for(Ghost g : ghosts) {
+			
+			if(pacman.positionX <= g.positionX + g.WIDTH &&
+				pacman.positionX + pacman.WIDTH >= g.positionX &&
+				pacman.positionY <= g.positionY + g.WIDTH &&
+				pacman.positionY + pacman.WIDTH >= g.positionY) {
+				lives--;
+				pacman.positionX = pacman.positionY = 35;
+				pacman.currentKey = null;
+			}
+			
 		}
+		
+	}
+	
+	private boolean checkGameFinished() {
+		
+		return GameMap.foods.isEmpty() || lives <= 0;
 		
 	}
 	
@@ -176,7 +198,12 @@ public class PlayScreenView extends Screen{
 					clear();
 					render();
 					change();
-					checkGameFinished();
+					checkCollideWithEnemy();
+					if (checkGameFinished()) {
+						endGame(this);
+						EndGameScreenController.routeToVictoryScreen(player, score);
+					};
+					
 					
 				}
 				
@@ -186,6 +213,10 @@ public class PlayScreenView extends Screen{
 		
 		loop.start();
 		
+	}
+	
+	private void endGame(AnimationTimer loop) {
+		loop.stop();
 	}
 	
 }

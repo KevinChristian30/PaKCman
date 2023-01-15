@@ -15,8 +15,6 @@ public class Pacman extends GameObject implements IMovable{
 	public final int WIDTH = 20;
 	public int positionX, positionY;
 	
-	boolean collide;
-	
 	public KeyCode currentKey;
 	
 	public Pacman(int positionX, int positionY) {

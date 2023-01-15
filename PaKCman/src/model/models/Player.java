@@ -112,14 +112,25 @@ public class Player implements Model {
 		
 	}
 
+	public static void updateScore(String name, int score) {
+		
+		Connect connection = Connect.getInstance();
+		String query = "UPDATE msplayer SET PlayerHighScore = %d WHERE PlayerName = '%s'";
+		query = String.format(query, score, name);
+		connection.executeUpdate(query);
+		
+	}
+
 	@Override
 	public void update() {
+		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void delete() {
+		// TODO Auto-generated method stub
 		
 	}
-	
+
 }
