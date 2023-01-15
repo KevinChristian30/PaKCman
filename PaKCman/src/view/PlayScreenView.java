@@ -69,8 +69,10 @@ public class PlayScreenView extends Screen{
 		
 		ghosts = new ArrayList<>();
 		pacman = new Pacman(35, 35);
-		ghosts.add(new Ghost(35, 515, Color.RED));
-//		ghosts.add(new Ghost(510, 35, Color.GREEN));
+		ghosts.add(new Ghost(35, 515, Color.RED, 35, 515));
+		ghosts.add(new Ghost(905, 35, Color.LIMEGREEN, 905, 35));
+		ghosts.add(new Ghost(905, 515, Color.ORANGE, 905, 515));
+		ghosts.add(new Ghost(605, 515, Color.PINK, 605, 515));
 		gameMap = new GameMap();
 
 		scene = new Scene(layoutContainer);
@@ -167,9 +169,13 @@ public class PlayScreenView extends Screen{
 				pacman.positionX + pacman.WIDTH >= g.positionX &&
 				pacman.positionY <= g.positionY + g.WIDTH &&
 				pacman.positionY + pacman.WIDTH >= g.positionY) {
+				
 				lives--;
 				pacman.positionX = pacman.positionY = 35;
 				pacman.currentKey = null;
+				
+				ghosts.forEach(e -> e.resetPos());
+		
 			}
 			
 		}

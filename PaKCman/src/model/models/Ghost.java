@@ -7,17 +7,25 @@ import view.PlayScreenView;
 
 public class Ghost extends GameObject{
 
-	public int SPEED = 3;
+	public int SPEED = 2;
 	public final int WIDTH = 20;
 	public int positionX, positionY;
 	private Color color;
+	private int startX, startY;
 	
-	public Ghost(int positionX, int positionY, Color color) {
+	public Ghost(int positionX, int positionY, Color color, int startX, int startY) {
 		
 		this.positionX = positionX;
 		this.positionY = positionY;
 		this.color = color;
+		this.startX = startX;
+		this.startY = startY;
 		
+	}
+	
+	public void resetPos() {
+		this.positionX = startX;
+		this.positionY = startY;
 	}
 
 	@Override
