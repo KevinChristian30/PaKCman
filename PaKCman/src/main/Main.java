@@ -13,7 +13,10 @@ import view.VictoryScreenView;
 
 public class Main extends Application{
 
-	public static void main(String[] args) { launch(args); }
+	public static void main(String[] args) { 
+//		launch(args); 
+		Application.launch(Main.class, args);
+	}
 	
 	private static Stage stage;
 	private Scene scene;
@@ -55,9 +58,7 @@ public class Main extends Application{
 		initiateStage();
 		initiateMetaData();
 		stage.show();
-//		new LoginScreenView();
-		
-		new PlayScreenView(new Player("Kevin", "abc", 100));
+		new LoginScreenView();
 		
 	}
 
